@@ -50,7 +50,7 @@ function shouldShowDescription(item: any): boolean {
     const itemId = `item-${group.source_name.replace(/\s+/g, '-')}-${index}`;
     const showDesc = shouldShowDescription(item);
     return (
-      <div class="bg-white border-l border-r border-b border-purple-700 px-5 py-3 last:rounded-b-xl hover:bg-purple-100 transition-colors">
+      <div class="bg-white border-l border-r border-b border-purple-700 px-5 py-3 last:rounded-b-xl hover:bg-purple-500 transition-colors">
 
         <!-- Title row -->
         <div class="flex items-start justify-between gap-3">
@@ -61,7 +61,7 @@ function shouldShowDescription(item: any): boolean {
               href={item.source_url}
               target="_blank"
               rel="noreferrer noopener"
-              class="inline-flex items-center gap-1 hover:text-purple-600"
+              class="inline-flex items-center gap-1 hover:text-white"
             >
               {item.source_title}
               <svg class="inline w-3.5 h-3.5 text-purple-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
