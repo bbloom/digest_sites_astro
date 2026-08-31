@@ -1,9 +1,10 @@
 ---
 interface Props {
   digest: any;
+  isFirst?: boolean;
 }
 
-const { digest } = Astro.props;
+const { digest, isFirst = false } = Astro.props;
 
 function formatDate(dateStr: string): string {
   return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-US', {
@@ -15,11 +16,33 @@ function formatDate(dateStr: string): string {
 }
 ---
 
-<p class="mb-2">
-  <a 
-    href={`/${digest.slug}`} 
-    class="text-purple-700 hover:underline"
-  >
-    {formatDate(digest.date)} ({digest.total_items} {digest.total_items === 1 ? 'item' : 'items'} from <span class="text-sm">{digest.source_count} {digest.source_count === 1 ? 'source' : 'sources'})</span>
-  </a>
-</p>
+<a href={`/${digest.slug}`}
+   class="group block bg-white hover:bg-purple-100/60 border border-purple-200/80 hover:border-purple-300 rounded-lg p-4 transition-all duration-150 shadow-sm hover:shadow-md">
+  <div class="flex items-center justify-between gap-4">
+
+    <!-- Left: Date & Details -->
+    <div class="space-y-1">
+      <div class="font-semibold text-purple-950 group-hover:text-purple-700 flex items-center gap-2">
+        <span>{formatDate(digest.date)}</span>
+        {isFirst && (
+          <span class="text-xs font-normal text-purple-500 group-hover:text-purple-700 transition-colors">
+            &bull; Today
+          </span>
+        )}
+      </div>
+      <div class="text-xs text-purple-600 flex items-center gap-3">
+        <span><strong>{digest.total_items}</strong> {digest.total_items === 1 ? 'item' : 'items'}</span>
+        <span>&bull;</span>
+        <span><strong>{digest.source_count}</strong> {digest.source_count === 1 ? 'source' : 'sources'}</span>
+      </div>
+    </div>
+
+    <!-- Right: Arrow -->
+    <div class="shrink-0 text-purple-400 group-hover:text-purple-700 group-hover:translate-x-0.5 transition-all">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+
+  </div>
+</a>
