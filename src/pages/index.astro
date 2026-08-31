@@ -1,14 +1,21 @@
 ---
+import Base from '../layouts/Base.astro';
+import DigestCard from '../components/DigestCard.astro';
+import { getDigests } from '../lib/api';
+
+const digests = await getDigests();
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Basic Astro Site</title>
-  </head>
-  <body>
-    <h1>It works!</h1>
-    <p>Deployed to Cloudflare Pages via GitHub.</p>
-  </body>
-</html>
+<Base>
+
+  {digests.length === 0 && (
+    <div class="bg-white border border-purple-200 rounded-xl p-6 text-center text-purple-400">
+      No digests yet — the first one is on the way!
+    </div>
+  )}
+
+  {digests.map((digest: any) => (
+    <DigestCard digest={digest} />
+  ))}
+
+</Base>

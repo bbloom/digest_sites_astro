@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import SourceGroup from '../components/SourceGroup.astro';
+import { getDigests } from '../lib/api';
+
+export async function getStaticPaths() {
+  const digests = await getDigests();
+
+  return digests.map((digest: any) => ({
+    params: { slug: digest.slug },
+    props:  { digest },
+  }));
+}
+
+interface Props {
+  digest: any;
+}
+
+const { digest } = Astro.props;
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<Base title={formatDate(digest.date)}>
+
+  <!-- Digest header -->
+  <div class="bg-white border border-purple-200 rounded-xl p-5 mb-6 shadow-sm">
+    <h1 class="text-xl font-bold text-purple-900 mb-1">
+      {formatDate(digest.date)}
+    </h1>
+    <p class="text-sm text-purple-600">
+      {digest.total_items} {digest.total_items === 1 ? 'item' : 'items'} from {digest.source_count} {digest.source_count === 1 ? 'source' : 'sources'}
+    </p>
+  </div>
+
+  <!-- Source groups -->
+  {(digest.groups ?? []).map((group: any) => (
+    <SourceGroup group={group} />
+  ))}
+
+  <!-- Back link -->
+  <div class="mt-6 text-center">
+    <a href="/" class="text-purple-500 text-sm hover:underline">&larr; All Digests</a>
+  </div>
+
+</Base>

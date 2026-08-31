@@ -1,0 +1,75 @@
+---
+interface Props {
+  group: any;
+}
+
+const { group } = Astro.props;
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+function sourceTypeLabel(sourceType: string): string {
+  const labels: Record<string, string> = {
+    youtube_channel: 'YouTube',
+    podcast:         'Podcast',
+    text_based_rss:  'RSS',
+  };
+  return labels[sourceType] ?? sourceType;
+}
+---
+
+<div class="mb-6">
+
+  <!-- Source header -->
+  <div class="bg-purple-100 border border-purple-200 rounded-t-xl px-5 py-3">
+    <h2 class="font-bold text-purple-900">{group.source_name}</h2>
+    {group.source_type && (
+      <span class="text-xs text-purple-500">{sourceTypeLabel(group.source_type)}</span>
+    )}
+  </div>
+
+  <!-- Items -->
+  {(group.items ?? []).map((item: any) => (
+    <div class="bg-white border-l border-r border-b border-purple-200 px-5 py-4 last:rounded-b-xl">
+
+      <!-- Item title -->
+      <h3 class="text-base font-bold text-purple-900 leading-snug mb-1">
+        <a
+          href={item.source_url}
+          target="_blank"
+          rel="noreferrer noopener"
+          class="hover:text-purple-600"
+        >
+          {item.source_title}
+        </a>
+      </h3>
+
+      <!-- Meta -->
+      {item.source_published_at && (
+        <p class="text-xs text-purple-400 mb-2">
+          {formatDate(item.source_published_at)}
+        </p>
+      )}
+
+      <!-- Description -->
+      {item.source_description && (
+        <p class="text-sm text-purple-700 italic mb-3">{item.source_description}</p>
+      )}
+
+      <!-- Summary -->
+      {item.summary_html && (
+        <div
+          class="text-sm text-black leading-relaxed"
+          set:html={item.summary_html}
+        />
+      )}
+
+    </div>
+  ))}
+
+</div>

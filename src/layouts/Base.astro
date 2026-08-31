@@ -1,0 +1,51 @@
+---
+import { getList } from '../lib/api';
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+
+const list = await getList();
+
+const pageTitle = title ? `${title} · ${list.name}` : list.name;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <link href="/css/tailwind.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-purple-50 text-purple-900" style="font-family: 'Georgia', serif;">
+
+    <!-- Header -->
+    <header class="bg-purple-100 border-b border-purple-200 px-4 py-3">
+      <div class="max-w-3xl mx-auto">
+        <div class="font-bold text-lg text-purple-900 leading-tight">
+          <a href="/">{list.name}</a>
+        </div>
+        {list.description && (
+          <div class="text-sm text-purple-600 mt-1">{list.description}</div>
+        )}
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-3xl mx-auto px-4 py-6">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-100 border-t border-purple-200 mt-8 px-4 py-6">
+      <div class="max-w-3xl mx-auto text-center text-sm text-purple-600">
+        <p class="text-black">&copy; {new Date().getFullYear()} {list.name}</p>
+      </div>
+    </footer>
+
+  </body>
+</html>
