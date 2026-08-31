@@ -36,11 +36,12 @@ function shouldShowDescription(item: any): boolean {
 <div class="mb-6">
 
   <!-- Source header -->
-  <div class="bg-purple-100 border border-purple-200 rounded-t-xl px-5 py-3">
-    <h2 class="font-bold text-purple-900">{group.source_name}</h2>
-    {group.source_type && (
-      <span class="text-xs text-purple-500">{sourceTypeLabel(group.source_type)}</span>
-    )}
+  <div class="bg-purple-100 border-2 border-purple-200 rounded-t-xl px-5 py-3">
+    <div class="font-bold text-purple-900 text-lg">{group.source_name}
+      {group.source_type && (
+        <span class="text-xs">({sourceTypeLabel(group.source_type)})</span>
+      )}
+    </div>
   </div>
 
   <!-- Items -->
@@ -59,7 +60,7 @@ function shouldShowDescription(item: any): boolean {
               href={item.source_url}
               target="_blank"
               rel="noreferrer noopener"
-              class="hover:text-purple-600 inline-flex items-center gap-1"
+              class="hover:text-white inline-flex items-center gap-1 hover:bg-purple-600 rounded px-1 -mx-1"
             >
               {item.source_title}
               <svg class="inline w-3.5 h-3.5 text-purple-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -70,7 +71,7 @@ function shouldShowDescription(item: any): boolean {
 
           <!-- Show/Hide button -->
           <button
-            onclick={`document.getElementById('${itemId}').classList.toggle('hidden')`}
+            onclick={`const el = document.getElementById('${itemId}'); el.classList.toggle('hidden'); this.textContent = el.classList.contains('hidden') ? 'Show' : 'Hide';`}
             class="shrink-0 text-xs text-purple-500 hover:text-purple-700 border border-purple-200 hover:border-purple-400 rounded px-2 py-0.5 transition-colors"
           >
             Show
