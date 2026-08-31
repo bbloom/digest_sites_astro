@@ -36,10 +36,10 @@ function shouldShowDescription(item: any): boolean {
 <div class="mb-6">
 
   <!-- Source header -->
-  <div class="bg-purple-100 border-2 border-purple-200 rounded-t-xl px-5 py-3">
+  <div class="bg-purple-100 border-2 border-purple-700 rounded-t-xl px-5 py-3">
     <div class="font-bold text-purple-900 text-lg">{group.source_name}
       {group.source_type && (
-        <span class="text-xs">({sourceTypeLabel(group.source_type)})</span>
+        &nbsp;&nbsp;<span class="text-xs">({sourceTypeLabel(group.source_type)})</span>
       )}
     </div>
   </div>
@@ -49,7 +49,7 @@ function shouldShowDescription(item: any): boolean {
     const itemId = `item-${group.source_name.replace(/\s+/g, '-')}-${index}`;
     const showDesc = shouldShowDescription(item);
     return (
-      <div class="bg-white border-l border-r border-b border-purple-200 px-5 py-3 last:rounded-b-xl">
+      <div class="bg-white border-l border-r border-b border-purple-200 px-5 py-3 last:rounded-b-xl hover:bg-purple-200 hover:text-white">
 
         <!-- Title row -->
         <div class="flex items-start justify-between gap-3">
@@ -60,7 +60,7 @@ function shouldShowDescription(item: any): boolean {
               href={item.source_url}
               target="_blank"
               rel="noreferrer noopener"
-              class="hover:text-white inline-flex items-center gap-1 hover:bg-purple-600 rounded px-1 -mx-1"
+              class="inline-flex items-center gap-1 rounded px-1 -mx-1"
             >
               {item.source_title}
               <svg class="inline w-3.5 h-3.5 text-purple-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
