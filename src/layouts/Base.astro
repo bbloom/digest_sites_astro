@@ -7,6 +7,7 @@ interface Props {
 
 const { title } = Astro.props;
 
+const digestListName = import.meta.env.DIGEST_LIST_NAME;
 const list = await getList();
 
 const pageTitle = title ? `${title} · ${list.name}` : list.name;
@@ -25,13 +26,20 @@ const pageTitle = title ? `${title} · ${list.name}` : list.name;
 
     <!-- Header -->
     <header class="bg-purple-100 border-b border-purple-200 px-4 py-3">
-      <div class="max-w-3xl mx-auto">
-        <div class="font-bold text-lg text-purple-900 leading-tight">
-          <a href="/">{list.name}</a>
+      <div class="max-w-3xl mx-auto flex items-center gap-3">
+          <a href="/">
+            <img
+              src=""https://psn-images.bobbloompodcasts.com/phpserverlessnews_logo_3000x3000.png"
+              alt={digestListName}
+              class="object-cover"
+              style="width: 52px; height: 52px;"
+            />
+          </a>
+        <div>
+          <div class="font-bold text-lg text-purple-900 leading-tight">
+            <a href="/">{digestListName}</a>
+          </div>
         </div>
-        {list.description && (
-          <div class="text-sm text-purple-600 mt-1">{list.description}</div>
-        )}
       </div>
     </header>
 
@@ -42,10 +50,25 @@ const pageTitle = title ? `${title} · ${list.name}` : list.name;
 
     <!-- Footer -->
     <footer class="bg-purple-100 border-t border-purple-200 mt-8 px-4 py-6">
-      <div class="max-w-3xl mx-auto text-center text-sm text-purple-600">
-        <p class="text-black">&copy; {new Date().getFullYear()} {list.name}</p>
+       <div class="max-w-3xl mx-auto text-center text-sm text-purple-600 space-y-2"> 
+    
+        <!-- Footer links --> 
+        <nav class="flex flex-col items-center gap-y-2 mb-4">
+          <a href="https://bobbloomshow.com/" class="text-purple-600 hover:text-purple-900 hover:underline">Bob Bloom Show</a>
+          
+          <a href="https://phpserverlessnews.com" class="text-purple-600 hover:text-purple-900 hover:underline">PHP Serverless News Podcast </a>
+          
+          <a href="https://phpserverlessprofiles.com" class="text-purple-600 hover:text-purple-900 hover:underline">PHP Serverless Profiles Podcast </a>
+          
+          <a href="https://bobbloominterviews.com" class="text-purple-600 hover:text-purple-900 hover:underline">The Bob Bloom Interviews Podcast </a>
+              
+          <a href="https://github.com/local-toronto-php-groups/" class="text-purple-600 hover:text-purple-900 hover:underline"> I organize these Toronto area PHP Groups </a>
+        </nav>
+        
+        <p class="text-black">&copy; 2026 - {new Date().getFullYear()} South LaSalle Trading Corporation</p>
+
       </div>
-    </footer>
+    </footer> 
 
   </body>
 </html>
