@@ -7,7 +7,7 @@ interface Props {
 
 const { title } = Astro.props;
 
-const digestListName = import.meta.env.DIGEST_LIST_NAME;
+const digestListName = import.meta.env.DIGEST_NAME;
 const list = await getList();
 
 const pageTitle = title ? `${title} · ${list.name}` : list.name;
@@ -29,7 +29,7 @@ const pageTitle = title ? `${title} · ${list.name}` : list.name;
       <div class="max-w-3xl mx-auto flex items-center gap-3">
           <a href="/">
             <img
-              src=""https://psn-images.bobbloompodcasts.com/phpserverlessnews_logo_3000x3000.png"
+              src="https://psn-images.bobbloompodcasts.com/phpserverlessnews_logo_3000x3000.png"
               alt={digestListName}
               class="object-cover"
               style="width: 52px; height: 52px;"
@@ -65,7 +65,7 @@ const pageTitle = title ? `${title} · ${list.name}` : list.name;
           <a href="https://github.com/local-toronto-php-groups/" class="text-purple-600 hover:text-purple-900 hover:underline"> I organize these Toronto area PHP Groups </a>
         </nav>
         
-        <p class="text-black">&copy; 2026 - {new Date().getFullYear()} South LaSalle Trading Corporation</p>
+        <p class="text-black mt-4">&copy; 2026 - {new Date().getFullYear()} South LaSalle Trading Corporation</p>
 
       </div>
     </footer> 
