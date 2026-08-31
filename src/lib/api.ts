@@ -6,7 +6,7 @@
 const API_BASE_URL      = import.meta.env.API_BASE_URL;
 const API_BEARER_TOKEN  = import.meta.env.API_BEARER_TOKEN;
 const REQUESTING_DOMAIN = import.meta.env.REQUESTING_DOMAIN;
-const DIGEST_LIST_NAME  = import.meta.env.DIGEST_LIST_NAME;
+const DIGEST_NAME       = import.meta.env.DIGEST_NAME;
 
 async function apiFetch(): Promise<any> {
   const CF_ID     = import.meta.env.CF_ACCESS_CLIENT_ID;
@@ -15,7 +15,7 @@ async function apiFetch(): Promise<any> {
   const headers: Record<string, string> = {
     'Authorization':    `Bearer ${API_BEARER_TOKEN}`,
     'RequestingDomain': REQUESTING_DOMAIN,
-    'X-Digest-List':    DIGEST_LIST_NAME,
+    'X-Digest-List':    DIGEST_NAME,
   };
 
   if (CF_ID && CF_SECRET) {
